@@ -1,0 +1,25 @@
+{
+    "name": "Godot Dev Environment",
+    "dockerFile": "Dockerfile",
+    "customizations":
+    {
+        "vscode":
+        {
+            "settings":
+            {
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            },
+            "extensions": [
+                "ms-dotnettools.csharp", // For C# scripting (if using Mono)
+                "ms-python.python", // For Python tools/scripts
+                "tamasfe.even-better-toml", // For managing configuration files
+                "esbenp.prettier-vscode" // Optional: Formatting JSON, etc.
+            ]
+        }
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached" // Sync files
+    ],
+    "postCreateCommand": "pip install -r requirements.txt",
+    "remoteUser": "vscode"
+}

@@ -1,0 +1,47 @@
+# GLOBAL ARGS
+# https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+# Installing dotnet on feodra https://learn.microsoft.com/en-us/dotnet/core/install/linux-fedora?tabs=dotnet9
+ARG GODOT_VERSION "4.3-stable"
+ARG GODOT_DL_BASE_URL "https://github.com/godotengine/godot/releases/download/"
+ARG GODOT_FILENAME "Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+ARG GODOT_URL ${GODOT_DL_BASE_URL}${GODOT_VERSION}/${GODOT_FILENAME}
+ARG GODOT_INSTALL_DIR "/usr/local/bin/"
+ARG TMP_DIR "/tmp/"
+
+# STAGE 1: base image with fedora:41
+FROM fedora:41 as base
+# Install dependencies
+RUN dnf install -y \
+    git \
+    wget \
+    unzip \
+    python3 \
+    python3-pip \
+
+    dnf update -y && \
+    dnf install -y \
+    dotnet-sdk-9.0 \
+    aspnetcore-runtime-9.0 \
+    libXrandr-devel \
+    libXinerama-devel \
+    libXcursor-devel \
+    libXi-devel && \
+    dnf clean all
+
+RUN wget ${GODOT_URL} --directory-prefix=${TMP_DIR}
+
+# STAGE 2: godot image from base
+FROM base as godot
+# Install Godot
+RUN unzip ${TMP_DIR}${GODOT_FILENAME} -d ${GODOT_INSTALL_DIR} && \
+    rm ${GODOT_FILENAME}
+
+# Set up Python environment
+RUN pip3 install --upgrade pip
+
+# Set PATH for Godot
+ENV PATH=\"/usr/local/bin:$PATH\"
+
+# Default working directory
+WORKDIR /workspace
+

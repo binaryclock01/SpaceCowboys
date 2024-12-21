@@ -1,0 +1,23 @@
+{
+    "name": "Godot Linux Dev Environment",
+    "dockerFile": "Dockerfile",
+    "customizations":
+    {
+        "vscode":
+        {
+            "settings":
+            {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions":
+            [
+                "ms-dotnettools.csharp",
+                "ms-python.python",
+                "tamasfe.even-better-toml",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+    "postCreateCommand": "pip install -r requirements.txt",
+    "remoteUser": "vscode"
+}

@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtxfmmq1haeu8"]
+
+[ext_resource type="Script" path="res://cards/card_base.gd" id="1_ol2vy"]
+[ext_resource type="Texture2D" uid="uid://c21s2u5qesup3" path="res://cards/fireball.jpg" id="2_bukm8"]
+
+[node name="CardBase" type="MarginContainer"]
+offset_right = 250.0
+offset_bottom = 350.0
+script = ExtResource("1_ol2vy")
+
+[node name="Border" type="Sprite2D" parent="."]
+
+[node name="Image" type="Sprite2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_bukm8")
+centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TopGap" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="LeftGap" type="MarginContainer" parent="VBoxContainer/TopBar"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="Cost" type="MarginContainer" parent="VBoxContainer/TopBar"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TopBar/Cost"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/TopBar/Cost"]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="VBoxContainer/TopBar/Cost/CenterContainer"]
+layout_mode = 2
+text = "2
+"
+
+[node name="MidGap" type="MarginContainer" parent="VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="MarginContainer" parent="VBoxContainer/TopBar"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TopBar/Name"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/TopBar/Name"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/TopBar/Name/CenterContainer"]
+layout_mode = 2
+text = "Fireball"
+
+[node name="RightGap" type="MarginContainer" parent="VBoxContainer/TopBar"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="MidGap" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2

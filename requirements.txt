@@ -1,0 +1,3 @@
+# Example Python dependencies for automation or tooling
+black
+toml
